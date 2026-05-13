@@ -48,10 +48,14 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course [code=" + code +
-                ", courseName=" + courseName +
-                ", credits=" + credits +
-                ", capacity=" + capacity + "]";
+        return """
+               Course
+               -------------------------
+               Code      : %s
+               Name      : %s
+               Credits   : %d
+               Capacity  : %d
+               """.formatted(code, courseName, credits, capacity);
     }
     
     

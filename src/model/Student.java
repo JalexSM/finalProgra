@@ -49,7 +49,14 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+	    return """
+	           Student
+	           -------------------------
+	           ID         : %s
+	           First Name : %s
+	           Last Name  : %s
+	           Email      : %s
+	           """.formatted(id, firstName, lastName, email);
 	}
     
     

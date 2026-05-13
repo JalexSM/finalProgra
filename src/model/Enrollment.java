@@ -23,7 +23,16 @@ public class Enrollment {
 	}
 	@Override
 	public String toString() {
-		return "Enrollment [student=" + student + ", course=" + course + "]";
+	    return """
+	           Enrollment
+	           -------------------------
+	           Student : %s %s
+	           Course  : %s
+	           """.formatted(
+	                   student.getFirstName(),
+	                   student.getLastName(),
+	                   course.getCourseName()
+	           );
 	}
 	
 	
