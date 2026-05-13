@@ -2,47 +2,57 @@ package model;
 
 public class Course {
 	
-	private String code;
-    private String CourseName;
-    private String Credits;
-    private String Quota;
-	public Course(String code, String courseName, String credits, String quota) {
-		super();
-		this.code = code;
-		CourseName = courseName;
-		Credits = credits;
-		Quota = quota;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getCourseName() {
-		return CourseName;
-	}
-	public void setCourseName(String courseName) {
-		CourseName = courseName;
-	}
-	public String getCredits() {
-		return Credits;
-	}
-	public void setCredits(String credits) {
-		Credits = credits;
-	}
-	public String getQuota() {
-		return Quota;
-	}
-	public void setQuota(String quota) {
-		Quota = quota;
-	}
-	@Override
-	public String toString() {
-		return "Course [code=" + code + ", CourseName=" + CourseName + ", Credits=" + Credits + ", Quota=" + Quota
-				+ "]";
-	}
-    
+    private String code;
+    private String courseName;
+    private int credits;
+    private int capacity;
+    public Course(String code, String courseName, int credits, int capacity) {
+
+        this.code = code;
+        this.courseName = courseName;
+        this.credits = credits;
+        this.capacity = capacity;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    @Override
+    public String toString() {
+        return "Course [code=" + code +
+                ", courseName=" + courseName +
+                ", credits=" + credits +
+                ", capacity=" + capacity + "]";
+    }
     
     
 	
