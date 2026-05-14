@@ -1,16 +1,16 @@
 
 package service;
+import model.Enrollment;
+import model.Evaluation;
 
 public class GradeService {
-    public boolean validarNota(double nota) {
-        return nota >= 0 && nota <= 100;
+    
+    public double calcularNotaAutomatica(Enrollment inscripcion, Evaluation evaluacion) {
+        double notaFinal = evaluacion.getNotaCualitativa(); 
+        return notaFinal;
     }
 
     public String obtenerEstado(double notaFinal) {
-        if (notaFinal >= 61) {
-            return "APROBADO";
-        } else {
-            return "REPROBADO";
-        }
+        return (notaFinal >= 61) ? "APROBADO" : "REPROBADO";
     }
 }
