@@ -6,6 +6,7 @@ import java.util.List;
 import model.Course;
 import model.Enrollment;
 import model.Student;
+import repository.Database;
 
 public class EnrollmentSService {
 
@@ -32,6 +33,8 @@ public class EnrollmentSService {
         } 
         Enrollment newEnrollment = new Enrollment(student, course);
         enrollments.add(newEnrollment);
+        
+        Database.enrollments.add(newEnrollment);
 
         System.out.println("Student enrolled successfully.");
         return true;

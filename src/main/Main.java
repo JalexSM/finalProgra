@@ -1,7 +1,6 @@
 package main;
 
 import model.Course;
-import model.Enrollment;
 import model.Evaluation;
 import model.Laboratory;
 import model.ProjectWork;
@@ -15,144 +14,115 @@ import service.EnrollmentSService;
 public class Main {
 	public static void main(String[] args) {
 		new MainFrame();
-
-		Student student = createStudent();
-
-		Course course = createCourse();
-
-		Enrollment enrollment = createEnrollment(student, course);
-		EnrollmentSService enrollmentService = new EnrollmentSService();
-
-		enrollmentService.enrollStudent(student, course);
-		Student student2 = new Student("2025002", "Gesler", "Duque", "geslerdu8@gmail.com");
-
-		enrollmentService.enrollStudent(student2, course);
-		
 		// =========================
-		// CREATE EVALUATIONS
+		// CREATE STUDENTS
 		// =========================
 
-		Evaluation exam = createExam();
+		Student student1 = new Student("2025001", "Alexander", "Monroy", "alexander@gmail.com");
 
-		Evaluation laboratory = createLaboratory();
-
-		Evaluation project = createProject();
+		Student student2 = new Student("2025002", "Gesler", "Duque", "gesler@gmail.com");
 
 		// =========================
-		// ADD EVALUATIONS TO COURSE
+		// CREATE COURSE
 		// =========================
 
-		course.addEvaluation(exam);
-
-		course.addEvaluation(laboratory);
-
-		course.addEvaluation(project);
+		Course course1 = new Course("IPC101", "Introduction to Programming", 5, 2); // capacity
 
 		// =========================
 		// SAVE IN DATABASE
 		// =========================
 
-		Database.students.add(student);
+		Database.students.add(student1);
+		Database.students.add(student2);
 
-		Database.courses.add(course);
-
-		Database.enrollments.add(enrollment);
-
-		// =========================
-		// DISPLAY INFORMATION
-		// =========================
-
-		showStudent(student);
-
-		showCourse(course);
-
-		showEnrollment(enrollment);
-
-		showEvaluations(course);
+		Database.courses.add(course1);
 
 		// =========================
-		// FINAL RESULT
+		// CREATE ENROLLMENT SERVICE
+		// =========================
+
+		EnrollmentSService enrollmentService = new EnrollmentSService();
+
+		// =========================
+		// TEST ENROLLMENTS
+		// =========================
+
+		enrollmentService.enrollStudent(student1, course1);
+
+		enrollmentService.enrollStudent(student2, course1);
+
+		enrollmentService.enrollStudent(student1, course1);
+
+		// =========================
+		// CREATE EVALUATIONS
+		// =========================
+
+		Evaluation exam = new WrittenExam("Midterm Exam", 40, 85);
+
+		Evaluation laboratory = new Laboratory("Laboratory 1", 20, 90, 80);
+
+		Evaluation project = new ProjectWork("Final Project", 40, 95, true);
+
+		// =========================
+		// ADD EVALUATIONS TO COURSE
+		// =========================
+
+		course1.addEvaluation(exam);
+		course1.addEvaluation(laboratory);
+		course1.addEvaluation(project);
+
+		// =========================
+		// SHOW STUDENTS
+		// =========================
+
+		System.out.println("\n===== STUDENTS =====");
+
+		for (Student student : Database.students) {
+			System.out.println(student);
+		}
+
+		// =========================
+		// SHOW COURSES
+		// =========================
+
+		System.out.println("\n===== COURSES =====");
+
+		for (Course c : Database.courses) {
+			System.out.println(c);
+		}
+
+		// =========================
+		// SHOW ENROLLMENTS
+		// =========================
+
+		System.out.println("\n===== ENROLLMENTS =====");
+
+		Database.enrollments.forEach(System.out::println);
+
+		// =========================
+		// SHOW EVALUATIONS
+		// =========================
+
+		System.out.println("\n===== EVALUATIONS =====");
+
+		for (Evaluation evaluation : course1.getEvaluations()) {
+
+			System.out.println(evaluation.getName() + " -> Contribution: " + evaluation.obtainScore());
+		}
+
+		// =========================
+		// FINAL GRADE
 		// =========================
 
 		GradeService gradeService = new GradeService();
 
-		double finalGrade = gradeService.calculateFinalGrade(course);
+		double finalGrade = gradeService.calculateFinalGrade(course1);
 
 		System.out.println("\n===== FINAL RESULT =====");
 
 		System.out.println("Final course grade: " + finalGrade);
 
 		System.out.println("Status: " + gradeService.getStatus(finalGrade));
-	}
-
-	// =========================
-	// CREATION METHODS
-	// =========================
-
-	public static Student createStudent() {
-
-		return new Student("2025001", "Alexander", "Monroy", "alexander@gmail.com");
-	}
-
-	public static Course createCourse() {
-
-		return new Course("IPC101", "Introduction to Programming", 5, 1);
-	}
-
-	public static Enrollment createEnrollment(Student student, Course course) {
-
-		return new Enrollment(student, course);
-	}
-
-	public static Evaluation createExam() {
-
-		return new WrittenExam("Midterm Exam", 40, 85);
-	}
-
-	public static Evaluation createLaboratory() {
-
-		return new Laboratory("Laboratory 1", 20, 90, 80);
-	}
-
-	public static Evaluation createProject() {
-
-		return new ProjectWork("Final Project", 40, 95, true);
-	}
-
-	// =========================
-	// DISPLAY METHODS
-	// =========================
-
-	public static void showStudent(Student student) {
-
-		System.out.println("\n===== STUDENT =====");
-
-		System.out.println(student);
-	}
-
-	public static void showCourse(Course course) {
-
-		System.out.println("\n===== COURSE =====");
-
-		System.out.println(course);
-	}
-
-	public static void showEnrollment(Enrollment enrollment) {
-
-		System.out.println("\n===== ENROLLMENT =====");
-
-		System.out.println(enrollment);
-	}
-
-	public static void showEvaluations(Course course) {
-
-		System.out.println("\n===== EVALUATIONS =====");
-
-		for (Evaluation evaluation : course.getEvaluations()) {
-
-			System.out.println(evaluation.getName() + " -> Contribution: " + evaluation.obtainScore());
-		}
-
 	}
 
 }
