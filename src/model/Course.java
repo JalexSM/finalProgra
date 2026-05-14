@@ -1,17 +1,27 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Course {
-	
+
     private String code;
     private String courseName;
     private int credits;
     private int capacity;
-    public Course(String code, String courseName, int credits, int capacity) {
+
+    private ArrayList<Evaluation> evaluations;
+
+    public Course(String code,
+                  String courseName,
+                  int credits,
+                  int capacity) {
 
         this.code = code;
         this.courseName = courseName;
         this.credits = credits;
         this.capacity = capacity;
+
+        this.evaluations = new ArrayList<>();
     }
 
     public String getCode() {
@@ -46,6 +56,14 @@ public class Course {
         this.capacity = capacity;
     }
 
+    public ArrayList<Evaluation> getEvaluations() {
+        return evaluations;
+    }
+
+    public void addEvaluation(Evaluation evaluation) {
+        evaluations.add(evaluation);
+    }
+
     @Override
     public String toString() {
         return """
@@ -57,8 +75,4 @@ public class Course {
                Capacity  : %d
                """.formatted(code, courseName, credits, capacity);
     }
-    
-    
-	
-
 }
