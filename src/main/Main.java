@@ -7,9 +7,11 @@ import model.Laboratory;
 import model.ProjectWork;
 import model.Student;
 import model.WrittenExam;
-
+import ui.MainFrame;
 public class Main {
 	public static void main(String[] args) {
+		new MainFrame();
+		
 
 		// Create main objects
 		Student student = createStudent();
