@@ -10,6 +10,7 @@ import model.WrittenExam;
 import repository.Database;
 import service.GradeService;
 import ui.MainFrame;
+import service.EnrollmentSService;
 
 public class Main {
 	public static void main(String[] args) {
@@ -20,7 +21,13 @@ public class Main {
 		Course course = createCourse();
 
 		Enrollment enrollment = createEnrollment(student, course);
+		EnrollmentSService enrollmentService = new EnrollmentSService();
 
+		enrollmentService.enrollStudent(student, course);
+		Student student2 = new Student("2025002", "Gesler", "Duque", "geslerdu8@gmail.com");
+
+		enrollmentService.enrollStudent(student2, course);
+		
 		// =========================
 		// CREATE EVALUATIONS
 		// =========================
@@ -89,7 +96,7 @@ public class Main {
 
 	public static Course createCourse() {
 
-		return new Course("IPC101", "Introduction to Programming", 5, 30);
+		return new Course("IPC101", "Introduction to Programming", 5, 1);
 	}
 
 	public static Enrollment createEnrollment(Student student, Course course) {
