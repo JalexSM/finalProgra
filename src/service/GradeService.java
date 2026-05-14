@@ -1,16 +1,28 @@
-
 package service;
-import model.Enrollment;
+
+import model.Course;
 import model.Evaluation;
 
 public class GradeService {
-    
-    public double calcularNotaAutomatica(Enrollment inscripcion, Evaluation evaluacion) {
-        double notaFinal = evaluacion.getNotaCualitativa(); 
-        return notaFinal;
-    }
 
-    public String obtenerEstado(double notaFinal) {
-        return (notaFinal >= 61) ? "APROBADO" : "REPROBADO";
-    }
+	public double calculateFinalGrade(Course course) {
+
+		double finalGrade = 0;
+
+		for (Evaluation evaluation : course.getEvaluations()) {
+
+			finalGrade += evaluation.obtainScore();
+		}
+
+		return finalGrade;
+	}
+
+	public String getStatus(double finalGrade) {	
+
+		if (finalGrade >= 61) {
+			return "PASSED";
+		}
+
+		return "FAILED";
+	}
 }
