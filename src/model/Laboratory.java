@@ -1,25 +1,22 @@
 package model;
 
-public class Laboratory extends Evaluation{
+public class Laboratory extends Evaluation {
 
-    private double notaPractica;
-    private double notaReporte;
+	private double gradePractict;
+	private double gradeReport;
+
 	public Laboratory(String name, double weighing, double notaPractica, double notaReporte) {
 		super(name, weighing);
-		this.notaPractica = notaPractica;
-		this.notaReporte = notaReporte;
+		this.gradePractict = notaPractica;
+		this.gradeReport = notaReporte;
 	}
+
 	@Override
 	public double obtainScore() {
-		
-		
-        double notaFinalLab = (notaPractica * 0.70) + (notaReporte * 0.30);
 
-        return (notaFinalLab * weighing) / 100;
+		double gradeFinalLab = (gradePractict * 0.70) + (gradeReport * 0.30);
+
+		return (gradeFinalLab * weighing) / 100;
 	}
-    
-    
-	
-	
-	
+
 }
