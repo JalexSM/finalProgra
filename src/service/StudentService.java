@@ -6,9 +6,13 @@ import repository.Database;
 public class StudentService {
 
     public String saveStudent(Student student) {
-        // 1. Validate baseline existence and ID (essential for duplicate check)
+        // 1. Validate mandatory fields
         if (student == null || student.getId() == null || student.getId().isEmpty()) {
             return "Error: Student ID is required.";
+        }
+
+        if (student.getFirstName() == null || student.getFirstName().isEmpty()) {
+            return "Error: First name is required.";
         }
 
         // 2. Validate duplicate ID in Database.students
@@ -18,12 +22,7 @@ public class StudentService {
             }
         }
 
-        // 3. Validate mandatory fields (Now executed after duplicate validation)
-        if (student.getFirstName() == null || student.getFirstName().isEmpty()) {
-            return "Error: First name is required.";
-        }
-
-        // 4. Save in memory
+        // 3. Save in memory
         Database.students.add(student);
         
         return "Success: Student " + student.getFirstName() + " saved correctly.";
