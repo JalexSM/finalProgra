@@ -8,11 +8,11 @@ import model.Enrollment;
 import model.Student;
 import repository.Database;
 
-public class EnrollmentSService {
+public class EnrollmentService {
 
     private List<Enrollment> enrollments;
 
-    public EnrollmentSService() {
+    public EnrollmentService() {
         enrollments = new ArrayList<>();
     }
 
