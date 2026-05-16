@@ -18,7 +18,7 @@ public class EnrollmentService {
 
     public boolean enrollStudent(Student student, Course course) {
 
-        for (Enrollment enrollment : enrollments) {
+        for (Enrollment enrollment : Database.enrollments) {
             if (enrollment.getStudent().equals(student) &&
                 enrollment.getCourse().equals(course)) {
 
@@ -27,17 +27,23 @@ public class EnrollmentService {
             }
         }
 
-        if (enrollments.size() >= course.getCapacity()) {
+        int enrolledInThisCourse = 0;
+
+        for (Enrollment enrollment : Database.enrollments) {
+            if (enrollment.getCourse().equals(course)) {
+                enrolledInThisCourse++;
+            }
+        }
+
+        if (enrolledInThisCourse >= course.getCapacity()) {
             System.out.println("This course is full.");
             return false;
-        } 
+        }
+
         Enrollment newEnrollment = new Enrollment(student, course);
-        enrollments.add(newEnrollment);
-        
         Database.enrollments.add(newEnrollment);
 
         System.out.println("Student enrolled successfully.");
         return true;
-    
     }
-}
+} 
