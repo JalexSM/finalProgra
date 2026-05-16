@@ -7,6 +7,7 @@ import model.ProjectWork;
 import model.Student;
 import model.WrittenExam;
 import repository.Database;
+import service.CourseService;
 import service.EnrollmentService;
 import service.GradeService;
 import service.StudentService;
@@ -29,6 +30,8 @@ public class Main {
 		EnrollmentService enrollmentService = new EnrollmentService();
 
 		GradeService gradeService = new GradeService();
+		
+		CourseService courseservice = new CourseService();
 
 		// =========================
 		// CREATE STUDENTS
@@ -40,25 +43,26 @@ public class Main {
 		// =========================
 		// SAVE STUDENTS
 		// =========================
-		System.out.println(studentService.saveStudent(student1));
+		studentService.saveStudent(student1);
 
-		System.out.println(studentService.saveStudent(student2));
+		studentService.saveStudent(student2);
 
 		// Duplicate test
-		System.out.println(studentService.saveStudent(student1));
+		studentService.saveStudent(student1);
 
 		// =========================
 		// CREATE COURSE
 		// =========================
-		Course course1 = new Course("IPC101", "Introduction to Programming", 5, 20);
-		Course course2 = new Course("DEI102","Derecho informatico", 4,40);
-		
+		Course course1 = new Course("IPC101", "Introduction to Programming", 5, 2);
+		Course course2 = new Course("DEI102", "Derecho informatico", 4, 4);
+		Course course3 = new Course("MAT101", "Mathematics", 5, 3);
 
 		// =========================
 		// SAVE COURSE
 		// =========================
-		Database.courses.add(course1);
-		Database.courses.add(course2);
+		courseservice.saveCourse(course1);
+		courseservice.saveCourse(course2);
+		courseservice.saveCourse(course3);
 
 		// =========================
 		// TEST ENROLLMENTS
